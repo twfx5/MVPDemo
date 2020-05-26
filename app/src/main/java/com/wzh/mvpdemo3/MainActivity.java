@@ -1,43 +1,38 @@
 package com.wzh.mvpdemo3;
 
-import android.os.Bundle;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.wzh.mvpdemo.R;
+import com.wzh.mvpdemo3.base.BaseActivity;
 
 /**
- * MVP例子
- * M： model层，访问网络请求写在这里
- * V: View层，Activity、Fragment、View
- * P：控制层，解耦层
+ * MainActivity继承自BaseActivity，也是要指明具体的Presenter
  *
- * 好处：
- * 解耦，维护性好
- * 定好协议后，可以多人开发（互相之间不用关注了）
- * 复用性强，其他地方想用，直接拷贝new Presenter层
  */
-public class MainActivity extends AppCompatActivity implements UserInfoContract.UserInfoView{
+public class MainActivity extends BaseActivity<UserInfoPresenter> implements UserInfoContract.UserInfoView {
 
     private TextView textView;
-    private UserInfoPresenter mPresenter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    protected UserInfoPresenter createPresenter() {
+        return new UserInfoPresenter() ;
+    }
+
+    @Override
+    protected void initData() {
+        getPresenter().getUserInfo();
+    }
+
+    @Override
+    protected void initView() {
         textView = findViewById(R.id.tv);
-        mPresenter = new UserInfoPresenter();
-        mPresenter.attach(this);
-        mPresenter.getUserInfo();
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mPresenter.detach();
+    protected void setContentView() {
+        setContentView(R.layout.activity_main);
     }
+
 
     @Override
     public void onLoading() {

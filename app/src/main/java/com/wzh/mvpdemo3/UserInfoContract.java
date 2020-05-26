@@ -1,5 +1,8 @@
 package com.wzh.mvpdemo3;
 
+import com.wzh.mvpdemo3.base.BasePresenter;
+import com.wzh.mvpdemo3.base.BaseView;
+
 /**
  * 协议类Contract（可有可无）
  * 多人协作开发时，先写好这个类，相当于搭好框架
@@ -7,7 +10,7 @@ package com.wzh.mvpdemo3;
 public class UserInfoContract {
 
     // view层
-    interface UserInfoView {
+    interface UserInfoView extends BaseView {
         void onLoading();
         void onError();
         void onSuccess(String msg);
