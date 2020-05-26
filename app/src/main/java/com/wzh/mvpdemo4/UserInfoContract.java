@@ -1,6 +1,6 @@
-package com.wzh.mvpdemo3;
+package com.wzh.mvpdemo4;
 
-import com.wzh.mvpdemo3.base.BaseView;
+import com.wzh.mvpdemo4.base.BaseView;
 
 /**
  * 协议类Contract（可有可无）
